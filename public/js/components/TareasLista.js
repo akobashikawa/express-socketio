@@ -24,13 +24,7 @@ const TareasLista = {
 
   data() {
     return {
-      items: [
-        {id: 1, texto: 'Prueba1'},
-        {id: 2, texto: 'Prueba2'},
-        {id: 3, texto: 'Prueba3'},
-        {id: 4, texto: 'Prueba4'},
-        {id: 5, texto: 'Prueba5'},
-      ],
+      items: [],
       url: '',
     };
   },

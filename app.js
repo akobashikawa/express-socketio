@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();
 
-const tareasRouter = require('./api/modules/tareas/tareasRouter');
+const tareasRouter = require('./api/modules/tareas/TareasRouter');
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 

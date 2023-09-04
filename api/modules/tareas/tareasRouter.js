@@ -1,16 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  const items = [];
-  res.json(items)
-});
+const { tareasController } = require('../../dependencies');
 
-router.get('/:id', (req, res) => {
-  res.json({
-    id: 123,
-    texto: 'Prueba',
-  });
-});
+router.get('/', tareasController.getTareas);
+
+router.get('/:id', tareasController.getTarea);
 
 module.exports = router;
