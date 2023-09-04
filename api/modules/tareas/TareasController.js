@@ -5,9 +5,10 @@ class TareasController {
 
   getTareas = async (req, res, next) => {
     try {
-      const items = await tareasService.getTareas();
+      const items = await this.tareasService.getTareas();
       res.json(items);
     } catch (error) {
+      console.log(error.message);
       res.status(500).send(error);
     }
   }
@@ -22,7 +23,7 @@ class TareasController {
       });
     }
     try {
-      const item = tareasService.getTarea(id);
+      const item = this.tareasService.getTarea(id);
       res.json(item);
     } catch (error) {
       res.status(500).send(error);

@@ -6,7 +6,7 @@ class TareasRepository {
 
   async getTareas() {
     try {
-      const items = await this.Tareas.findAll();
+      const items = await this.Tarea.findAll();
       return items;
     } catch (error) {
       throw error;
@@ -15,7 +15,7 @@ class TareasRepository {
 
   async getTarea(id) {
     try {
-      const items = await this.Tareas.findByPk(id);
+      const items = await this.Tarea.findByPk(id);
       return items;
     } catch (error) {
       throw error;
