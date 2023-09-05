@@ -3,7 +3,7 @@ const TareasItem = {
 
   template: `<div>
     <div class="input-group">
-      <input class="form-control" type="text" v-model="idTarea" placeholder="idTarea" @input="updateUrls"/>
+      <input class="form-control" type="text" v-model="idTarea" placeholder="id" @input="updateUrls"/>
     </div>
 
     <div class="input-group">
@@ -20,7 +20,7 @@ const TareasItem = {
       <pre>{{ item }}</pre>
 
       <div class="input-group">
-        <input class="form-control" type="text" v-model="idTarea" placeholder="idTarea" @input="updateUrls"/>
+        <input class="form-control" type="text" v-model="idTarea" placeholder="id" @input="updateUrls"/>
       </div>
 
       <div class="row">
@@ -44,7 +44,7 @@ const TareasItem = {
       <!-- DELETE -->
 
       <div class="input-group">
-        <input class="form-control" type="text" v-model="idTarea" placeholder="idTarea" @input="updateUrls"/>
+        <input class="form-control" type="text" v-model="idTarea" placeholder="id" @input="updateUrls"/>
       </div>
 
       <div class="input-group">
@@ -60,6 +60,9 @@ const TareasItem = {
       <div v-if="!isObjectEmpty(deleted)">
         <pre>{{ deleted }}</pre>
       </div>
+    </div>
+    <div v-else>
+      No existe el item
     </div>
 
   </div>`,
@@ -102,7 +105,7 @@ const TareasItem = {
 
   methods: {
     isObjectEmpty(obj) {
-      return JSON.stringify(obj) === "{}";
+      return (obj == null) || JSON.stringify(obj) === "{}";
     },
 
     updateUrls() {
@@ -131,8 +134,11 @@ const TareasItem = {
 
       try {
         const response = await axios.patch(this.updateUrl, body);
-        this.updated = response.data;
-        this.getItem();
+        const result = response.data;
+        if (result) {
+          this.$emit('itemupdated', this.idTarea);
+          this.getItem();
+        }
       } catch (error) {
         console.log(error);
         this.errorUpdate = `${error.message}\n${JSON.stringify(error.response.data)}`;
@@ -144,7 +150,13 @@ const TareasItem = {
 
       try {
         const response = await axios.delete(this.deleteUrl);
-        this.deleted = response.data;
+        const deleted = response.data;
+        if (deleted) {
+          // this.idTarea = null;
+          // this.item = null;
+          this.getItem();
+          this.$emit('itemdeleted', this.idTarea);
+        }
       } catch (error) {
         console.log(error);
         this.errorDelete = `${error.message}\n${JSON.stringify(error.response.data)}`;

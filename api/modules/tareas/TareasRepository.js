@@ -15,8 +15,41 @@ class TareasRepository {
 
   async getTarea(id) {
     try {
-      const items = await this.Tarea.findByPk(id);
-      return items;
+      const item = await this.Tarea.findByPk(id);
+      return item;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createTarea(body) {
+    try {
+      const item = await this.Tarea.create(body);
+      return item;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateTarea(id, body) {
+    try {
+      const item = await this.Tarea.update({
+        ...body
+      }, {
+        where: { id }
+      });
+      return item;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteTarea(id) {
+    try {
+      const item = await this.Tarea.destroy({
+        where: { id }
+      });
+      return item;
     } catch (error) {
       throw error;
     }

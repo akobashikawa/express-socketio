@@ -4,7 +4,11 @@ const router = express.Router();
 const { tareasController } = require('../../dependencies');
 
 router.get('/', tareasController.getTareas);
-
 router.get('/:id', tareasController.getTarea);
+
+router.post('/', tareasController.createTarea);
+router.patch('/:id', tareasController.updateTarea);
+
+router.delete('/:id', tareasController.deleteTarea);
 
 module.exports = router;

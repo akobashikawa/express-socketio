@@ -1,8 +1,10 @@
+import TareasCreador from './TareasCreador.js';
 import TareasLista from './TareasLista.js';
 import TareasItem from './TareasItem.js';
 
 const Tareas = {
   components: {
+    TareasCreador,
     TareasLista,
     TareasItem,
   },
@@ -11,6 +13,20 @@ const Tareas = {
     <h1>Tareas</h1>
 
     <div class="accordion" id="tareas">
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-tareasCreador" aria-expanded="false" aria-controls="flush-tareasCreador">
+          Crear tarea
+          </button>
+        </h2>
+        <div id="flush-tareasCreador" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <TareasCreador @detallereq="updateItem" />
+          </div>
+        </div>
+      </div>
+
       <div class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-tareasLista" aria-expanded="false" aria-controls="flush-tareasLista">
@@ -19,7 +35,7 @@ const Tareas = {
         </h2>
         <div id="flush-tareasLista" class="accordion-collapse collapse">
           <div class="accordion-body">
-            <TareasLista @detallereq="setIdTarea" />
+            <TareasLista ref="tareaslista" @detallereq="updateItem" />
           </div>
         </div>
       </div>
@@ -32,7 +48,7 @@ const Tareas = {
         </h2>
         <div id="flush-tareasItem" class="accordion-collapse collapse">
           <div class="accordion-body">
-            <TareasItem :id="idTarea"/>
+            <TareasItem :id="idTarea" @itemupdated="updateItem" @itemdeleted="updateItem"/>
           </div>
         </div>
       </div>
@@ -47,8 +63,12 @@ const Tareas = {
   },
 
   methods: {
-    setIdTarea(idTarea) {
+    updateItem(idTarea) {
       this.idTarea = idTarea;
+      this.updateLista();
+    },
+    updateLista() {
+      this.$refs.tareaslista.getItems();
     }
   },
 

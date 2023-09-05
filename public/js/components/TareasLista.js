@@ -15,7 +15,7 @@ const TareasLista = {
             {{ item }}
           </td>
           <td>
-            <button class="btn btn-secondary btn-sm" @click="getItem(item.id)">Detalle</button>
+            <button class="btn btn-secondary btn-sm" @click="detalleItem(item.id)">Detalle</button>
           </td>
         </tr>
       </tbody>
@@ -50,7 +50,7 @@ const TareasLista = {
       }
     },
 
-    getItem(idTarea) {
+    detalleItem(idTarea) {
       this.$emit('detallereq', idTarea);
     },
 
