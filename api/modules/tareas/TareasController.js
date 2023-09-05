@@ -30,6 +30,8 @@ class TareasController {
   }
 
   createTarea = async (req, res, next) => {
+    const io = req.app.get('io');
+
     const body = req.body || null;
     if (!body) {
       return res.status(400).json({
@@ -39,6 +41,7 @@ class TareasController {
     }
     try {
       const item = await this.tareasService.createTarea(body);
+      io.emit('tareaCreated', item);
       res.json(item);
     } catch (error) {
       res.status(500).send(error);
@@ -46,6 +49,8 @@ class TareasController {
   }
 
   updateTarea = async (req, res, next) => {
+    const io = req.app.get('io');
+
     const id = +req.params.id || null;
     if (!id) {
       return res.status(400).json({
@@ -63,6 +68,7 @@ class TareasController {
     }
     try {
       const item = await this.tareasService.updateTarea(id, body);
+      io.emit('tareaUpdated', item);
       res.json(item);
     } catch (error) {
       res.status(500).send(error);
@@ -70,6 +76,8 @@ class TareasController {
   }
 
   deleteTarea = async (req, res, next) => {
+    const io = req.app.get('io');
+    
     const id = +req.params.id || null;
     if (!id) {
       return res.status(400).json({
@@ -79,6 +87,7 @@ class TareasController {
     }
     try {
       const result = await this.tareasService.deleteTarea(id);
+      io.emit('tareaDeleted', result);
       res.json(result);
     } catch (error) {
       res.status(500).send(error);

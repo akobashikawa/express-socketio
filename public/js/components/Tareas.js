@@ -1,3 +1,5 @@
+import { socket } from "../socket.js";
+
 import TareasCreador from './TareasCreador.js';
 import TareasLista from './TareasLista.js';
 import TareasItem from './TareasItem.js';
@@ -60,6 +62,23 @@ const Tareas = {
     return {
       idTarea: '',
     };
+  },
+
+  mounted() {
+    socket.on('tareaCreated', (msg) => {
+      console.log(msg);
+      this.updateLista();
+    });
+
+    socket.on('tareaUpdated', (msg) => {
+      console.log(msg);
+      this.updateLista();
+    });
+
+    socket.on('tareaDeleted', (msg) => {
+      console.log(msg);
+      this.updateLista();
+    });
   },
 
   methods: {
