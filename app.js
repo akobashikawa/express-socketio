@@ -1,15 +1,18 @@
+require('dotenv').config();
+
 const express = require('express');
 const http = require('http');
 const path = require('path');
+const cors = require('cors');
 const { configureSocket } = require('./api/modules/sockets/SocketsManager');
 
 const port = process.env.PORT || '3000';
 const app = express();
 server = http.createServer(app);
-const io = configureSocket(server, port);
+const io = configureSocket(server);
 app.set('io', io);
 
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

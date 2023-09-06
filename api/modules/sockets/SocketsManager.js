@@ -2,10 +2,12 @@ const { Server } = require("socket.io");
 
 const connectedUsers = {};
 
-function configureSocket(server, port) {
+function configureSocket(server) {
+  const frontendsUrlsString = process.env.FRONTENDS_URL || '';
+  const frontendsUrls = frontendsUrlsString.split(' ');
   const io = new Server(server, {
     cors: {
-      origin: `http://localhost:${port}`
+      origin: frontendsUrls
     }
   });
 
