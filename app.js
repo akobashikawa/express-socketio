@@ -11,8 +11,4 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use('/api/tareas', tareasRouter);
 
-app.listen(3000, () => {
-  console.log('Express corriendo en puerto 3000');
-});
-
 module.exports = app;
