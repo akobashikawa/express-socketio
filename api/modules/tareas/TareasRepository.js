@@ -46,10 +46,13 @@ class TareasRepository {
 
   async deleteTarea(id) {
     try {
-      const item = await this.Tarea.destroy({
+      const result = await this.Tarea.destroy({
         where: { id }
       });
-      return item;
+      if (result > 0) {
+        return id;
+      }
+      return result;
     } catch (error) {
       throw error;
     }
