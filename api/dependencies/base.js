@@ -6,25 +6,39 @@ module.exports = (sequelize) => {
     Tarea,
   } = models = require('./models')(sequelize);
 
-  const {
+  const TareasController = require('../modules/tareas/TareasController');
+  const NodosController = require('../modules/nodos/NodosController');
+
+  const controllers = {
     TareasController,
-  } = controllers = require('./controllers');
+    NodosController,
+  };
 
-  const {
+  const TareasService = require('../modules/tareas/TareasService');
+  const NodosService = require('../modules/nodos/NodosService');
+
+  const services = {
     TareasService,
-  } = services = require('./services');
+    NodosService,
+  };
 
-  const {
+  const TareasRepository = require('../modules/tareas/TareasRepository');
+  const NodosRepository = require('../modules/nodos/NodosRepository');
+
+  const repositories = {
     TareasRepository,
-  } = repositories = require('./repositories');
+    NodosRepository,
+  };
 
   // CONFIG
 
   const tareasRepository = new TareasRepository({ Tarea });
-
   const tareasService = new TareasService({ tareasRepository });
-
   const tareasController = new TareasController({ tareasService });
+
+  const nodosRepository = new NodosRepository();
+  const nodosService = new NodosService({ nodosRepository });
+  const nodosController = new NodosController({ nodosService });
 
   // PUB
 
@@ -37,5 +51,9 @@ module.exports = (sequelize) => {
     tareasRepository,
     tareasService,
     tareasController,
+
+    nodosRepository,
+    nodosService,
+    nodosController,
   }
 }
