@@ -4,7 +4,7 @@ class TareasRepository {
     this.Tarea = Tarea;
   }
 
-  async getTareas() {
+  async getItems() {
     try {
       const items = await this.Tarea.findAll();
       return items;
@@ -13,7 +13,7 @@ class TareasRepository {
     }
   }
 
-  async getTarea(id) {
+  async getItem(id) {
     try {
       const item = await this.Tarea.findByPk(id);
       return item;
@@ -22,7 +22,7 @@ class TareasRepository {
     }
   }
 
-  async createTarea(body) {
+  async createItem(body) {
     try {
       const item = await this.Tarea.create(body);
       return item;
@@ -31,7 +31,7 @@ class TareasRepository {
     }
   }
 
-  async updateTarea(id, body) {
+  async updateItem(id, body) {
     try {
       const item = await this.Tarea.update({
         ...body
@@ -44,7 +44,7 @@ class TareasRepository {
     }
   }
 
-  async deleteTarea(id) {
+  async deleteItem(id) {
     try {
       const result = await this.Tarea.destroy({
         where: { id }

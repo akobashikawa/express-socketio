@@ -3,9 +3,9 @@ class TareasController {
     this.tareasService = tareasService;
   }
 
-  getTareas = async (req, res, next) => {
+  getItems = async (req, res, next) => {
     try {
-      const items = await this.tareasService.getTareas();
+      const items = await this.tareasService.getItems();
       res.json(items);
     } catch (error) {
       console.log(error.message);
@@ -13,7 +13,7 @@ class TareasController {
     }
   }
 
-  getTarea = async (req, res, next) => {
+  getItem = async (req, res, next) => {
     const id = +req.params.id || null;
     if (!id) {
       return res.status(400).json({
@@ -22,14 +22,14 @@ class TareasController {
       });
     }
     try {
-      const item = await this.tareasService.getTarea(id);
+      const item = await this.tareasService.getItem(id);
       res.json(item);
     } catch (error) {
       res.status(500).send(error);
     }
   }
 
-  createTarea = async (req, res, next) => {
+  createItem = async (req, res, next) => {
     const io = req.app.get('io');
 
     const body = req.body || null;
@@ -40,7 +40,7 @@ class TareasController {
       });
     }
     try {
-      const item = await this.tareasService.createTarea(body);
+      const item = await this.tareasService.createItem(body);
       io.emit('tareaCreated', item);
       res.json(item);
     } catch (error) {
@@ -48,7 +48,7 @@ class TareasController {
     }
   }
 
-  updateTarea = async (req, res, next) => {
+  updateItem = async (req, res, next) => {
     const io = req.app.get('io');
 
     const id = +req.params.id || null;
@@ -67,7 +67,7 @@ class TareasController {
       });
     }
     try {
-      const item = await this.tareasService.updateTarea(id, body);
+      const item = await this.tareasService.updateItem(id, body);
       io.emit('tareaUpdated', item);
       res.json(item);
     } catch (error) {
@@ -75,7 +75,7 @@ class TareasController {
     }
   }
 
-  deleteTarea = async (req, res, next) => {
+  deleteItem = async (req, res, next) => {
     const io = req.app.get('io');
     
     const id = +req.params.id || null;
@@ -86,7 +86,7 @@ class TareasController {
       });
     }
     try {
-      const result = await this.tareasService.deleteTarea(id);
+      const result = await this.tareasService.deleteItem(id);
       io.emit('tareaDeleted', result);
       res.json(result);
     } catch (error) {

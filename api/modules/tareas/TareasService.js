@@ -3,23 +3,23 @@ class TareasService {
     this.tareasRepository = tareasRepository;
   }
 
-  async getTareas() {
-    return this.tareasRepository.getTareas();
+  async getItems() {
+    return this.tareasRepository.getItems();
   }
 
-  async getTarea(id) {
-    return this.tareasRepository.getTarea(id);
+  async getItem(id) {
+    return this.tareasRepository.getItem(id);
   }
 
-  async createTarea(body) {
-    return this.tareasRepository.createTarea(body);
+  async createItem(body) {
+    return this.tareasRepository.createItem(body);
   }
 
-  async updateTarea(id, body) {
-    return this.tareasRepository.updateTarea(id, body);
+  async updateItem(id, body) {
+    return this.tareasRepository.updateItem(id, body);
   }
-  async deleteTarea(id) {
-    return this.tareasRepository.deleteTarea(id);
+  async deleteItem(id) {
+    return this.tareasRepository.deleteItem(id);
   }
 }
 

@@ -3,16 +3,16 @@ const router = express.Router();
 
 const { tareasController } = require('../../dependencies');
 
-router.get('/', tareasController.getTareas /*
+router.get('/', tareasController.getItems /*
 #swagger.description = 'Obtiene la lista de tareas'
 */);
 
-router.get('/:id', tareasController.getTarea /*
+router.get('/:id', tareasController.getItem /*
 #swagger.description = 'Obtiene la tarea especificada'
 #swagger.parameters['id'] = { description: 'id de la tarea', schema: { type: 'integer' } }
 */);
 
-router.post('/', tareasController.createTarea /*
+router.post('/', tareasController.createItem /*
 #swagger.description = 'Crea una tarea y la devuelve'
 #swagger.parameters['body'] = {
         in: 'body',
@@ -21,7 +21,7 @@ router.post('/', tareasController.createTarea /*
         }
 }
 */);
-router.patch('/:id', tareasController.updateTarea /*
+router.patch('/:id', tareasController.updateItem /*
 #swagger.description = 'Modifica una tarea y la devuelve'
 #swagger.parameters['id'] = { description: 'id de la tarea', schema: { type: 'integer' } }
 #swagger.parameters['body'] = {
@@ -32,7 +32,7 @@ router.patch('/:id', tareasController.updateTarea /*
 }
 */);
 
-router.delete('/:id', tareasController.deleteTarea /*
+router.delete('/:id', tareasController.deleteItem /*
 #swagger.description = 'Elimina la tarea especificada y devuelve el id'
 #swagger.parameters['id'] = { description: 'id de la tarea', schema: { type: 'integer' } }
 */);
