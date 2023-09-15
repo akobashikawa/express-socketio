@@ -6,17 +6,29 @@ module.exports = (sequelize) => {
     Tarea,
   } = models = require('./models')(sequelize);
 
-  const {
+  const TareasController = require('../modules/tareas/TareasController');
+
+  const controllers = {
     TareasController,
-  } = controllers = require('./controllers');
+  };
 
-  const {
+  const TareasService = require('../modules/tareas/TareasService');
+
+  const services = {
     TareasService,
-  } = services = require('./services');
+  };
 
-  const {
+  const TareasFeatures = require('../modules/tareas/features/TareasFeatures');
+
+  const features = {
+    TareasFeatures,
+  };
+
+  const TareasRepository = require('../modules/tareas/TareasRepository');
+
+  const repositories = {
     TareasRepository,
-  } = repositories = require('./repositories');
+  };
 
   // CONFIG
 
@@ -24,13 +36,14 @@ module.exports = (sequelize) => {
 
   const tareasService = new TareasService({ tareasRepository });
 
-  const tareasController = new TareasController({ tareasService });
+  const tareasController = new TareasController({ TareasFeatures });
 
   // PUB
 
   return {
     ...models,
     ...controllers,
+    ...features,
     ...services,
     ...repositories,
 
