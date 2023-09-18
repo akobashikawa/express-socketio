@@ -13,9 +13,9 @@ class TareasRepository {
     }
   }
 
-  async getTarea(id) {
+  async getTarea(id) {console.log('TareasRepository.getTarea', id)
     try {
-      const item = await this.Tarea.findByPk(id);
+      const item = await this.Tarea.findByPk(id, { raw: true });
       return item;
     } catch (error) {
       throw error;

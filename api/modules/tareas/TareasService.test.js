@@ -30,8 +30,12 @@ describe('Se obtiene la lista de tareas', () => {
 describe('Se obtiene una tarea', () => {
 
     test('Se obtiene una tarea', async () => {
-        const id = 1;
+        const items = await tareasService.getTareas();
+        const lastItem = items.slice(0)[0];
+        console.log(lastItem)
+        const id = lastItem.id;
         const item = await tareasService.getTarea(id);
+        console.log(item.id, id)
         const result = item.id == id;
         expect(result).toBe(true);
     });
