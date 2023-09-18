@@ -1,62 +1,18 @@
+const obtenerTareasRepository = require('./features/obtenerTareas/obtenerTareasRepository');
+const obtenerTareaRepository = require('./features/obtenerTarea/obtenerTareaRepository');
+const crearTareaRepository = require('./features/crearTarea/crearTareaRepository');
+const actualizarTareaRepository = require('./features/actualizarTarea/actualizarTareaRepository');
+const eliminarTareaRepository = require('./features/eliminarTarea/eliminarTareaRepository');
+
 class TareasRepository {
 
   constructor({ Tarea }) {
     this.Tarea = Tarea;
-  }
-
-  async getTareas() {
-    try {
-      const items = await this.Tarea.findAll();
-      return items;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getTarea(id) {console.log('TareasRepository.getTarea', id)
-    try {
-      const item = await this.Tarea.findByPk(id, { raw: true });
-      return item;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async createTarea(body) {
-    try {
-      const item = await this.Tarea.create(body);
-      return item;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async updateTarea(id, body) {
-    try {
-      const updated = await this.Tarea.update({
-        ...body
-      }, {
-        where: { id },
-      });
-      const item = await this.getTarea(id);
-      return item;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async deleteTarea(id) {
-    try {
-      const result = await this.Tarea.destroy({
-        where: { id }
-      });
-      if (result > 0) {
-        return id;
-      }
-      return result;
-    } catch (error) {
-      throw error;
-    }
+    this.getTareas = obtenerTareasRepository(Tarea);
+    this.getTarea = obtenerTareaRepository(Tarea);
+    this.createTarea = crearTareaRepository(Tarea);
+    this.updateTarea = actualizarTareaRepository(Tarea, this.getTarea);
+    this.deleteTarea = eliminarTareaRepository(Tarea);
   }
 
 }
