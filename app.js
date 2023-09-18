@@ -12,13 +12,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const socketsRouter = require('./api/modules/sockets/SocketsRouter');
-const tareasRouter = require('./api/modules/tareas/TareasRouter');
+const SocketsRouter = require('./api/modules/sockets/SocketsRouter');
+const TareasRouter = require('./api/modules/tareas/TareasRouter');
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/apidoc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-app.use('/api/sockets', socketsRouter);
-app.use('/api/tareas', tareasRouter);
+app.use('/api/sockets', SocketsRouter);
+app.use('/api/tareas', TareasRouter);
 
 module.exports = app;

@@ -18,6 +18,7 @@ class TareasService {
   async updateTarea(id, body) {
     return this.tareasRepository.updateTarea(id, body);
   }
+  
   async deleteTarea(id) {
     return this.tareasRepository.deleteTarea(id);
   }

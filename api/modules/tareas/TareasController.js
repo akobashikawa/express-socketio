@@ -1,17 +1,11 @@
+const { obtenerTareasController } = require("./features");
+
 class TareasController {
   constructor({ tareasService }) {
     this.tareasService = tareasService;
+    this.getTareas = obtenerTareasController(tareasService);
   }
 
-  getTareas = async (req, res, next) => {
-    try {
-      const items = await this.tareasService.getTareas();
-      res.json(items);
-    } catch (error) {
-      console.log(error.message);
-      res.status(500).send(error);
-    }
-  }
 
   getTarea = async (req, res, next) => {
     const id = +req.params.id || null;
@@ -77,7 +71,7 @@ class TareasController {
 
   deleteTarea = async (req, res, next) => {
     const io = req.app.get('io');
-    
+
     const id = +req.params.id || null;
     if (!id) {
       return res.status(400).json({
