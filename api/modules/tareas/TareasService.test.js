@@ -46,7 +46,6 @@ describe('Se actualiza una tarea', () => {
             texto: 'TareasService.test BBB',
         }
         const item = await tareasService.updateTarea(id, body);
-        console.log(item);
         const result = item.texto == body.texto;
         expect(result).toBe(true);
     });

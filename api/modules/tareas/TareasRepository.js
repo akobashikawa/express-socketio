@@ -33,11 +33,12 @@ class TareasRepository {
 
   async updateTarea(id, body) {
     try {
-      const item = await this.Tarea.update({
+      const updated = await this.Tarea.update({
         ...body
       }, {
-        where: { id }
+        where: { id },
       });
+      const item = await this.getTarea(id);
       return item;
     } catch (error) {
       throw error;
