@@ -1,4 +1,4 @@
-module.exports = (tareasServices) => async (req, res, next) => {
+module.exports = (tareasService) => async (req, res, next) => {
   const io = req.app.get('io');
 
   const body = req.body || null;

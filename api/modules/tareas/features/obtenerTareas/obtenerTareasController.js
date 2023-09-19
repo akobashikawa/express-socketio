@@ -1,6 +1,6 @@
-module.exports = (tareasServices) => async (req, res, next) => {
+module.exports = (tareasService) => async (req, res, next) => {
   try {
-    const items = await tareasServices.getTareas();
+    const items = await tareasService.getTareas();
     res.json(items);
   } catch (error) {
     console.log(error.message);

@@ -1,4 +1,4 @@
-module.exports = (tareasServices) => async (req, res, next) => {
+module.exports = (tareasService) => async (req, res, next) => {
   const id = +req.params.id || null;
   if (!id) {
     return res.status(400).json({
