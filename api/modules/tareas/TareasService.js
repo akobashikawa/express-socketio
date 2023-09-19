@@ -1,26 +1,19 @@
+const obtenerTareasService = require('./features/obtenerTareas/obtenerTareasService');
+const obtenerTareaService = require('./features/obtenerTarea/obtenerTareaService');
+const crearTareaService = require('./features/crearTarea/crearTareaService');
+const actualizarTareaService = require('./features/actualizarTarea/actualizarTareaService');
+const eliminarTareaService = require('./features/eliminarTarea/eliminarTareaService');
+
 class TareasService {
   constructor({ tareasRepository }) {
     this.tareasRepository = tareasRepository;
+    this.getTareas = obtenerTareasService(tareasRepository);
+    this.getTarea = obtenerTareaService(tareasRepository);
+    this.createTarea = crearTareaService(tareasRepository);
+    this.updateTarea = actualizarTareaService(tareasRepository);
+    this.deleteTarea = eliminarTareaService(tareasRepository);
   }
-
-  async getItems() {
-    return this.tareasRepository.getItems();
-  }
-
-  async getItem(id) {
-    return this.tareasRepository.getItem(id);
-  }
-
-  async createItem(body) {
-    return this.tareasRepository.createItem(body);
-  }
-
-  async updateItem(id, body) {
-    return this.tareasRepository.updateItem(id, body);
-  }
-  async deleteItem(id) {
-    return this.tareasRepository.deleteItem(id);
-  }
+  
 }
 
 module.exports = TareasService;
